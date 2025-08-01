@@ -5,7 +5,8 @@ import calendar
 from datetime import datetime, timedelta, date # Import 'date' object
 
 import logging
-import os 
+import os
+import json
 
 from telegram.ext import (
     Application,
@@ -19,11 +20,16 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 import gspread
 
+# Cek dan buat credentials.json dari GOOGLE_CREDS_JSON environment
+if os.getenv("GOOGLE_CREDS_JSON"):
+    with open("credentials.json", "w") as f:
+        json.dump(json.loads(os.getenv("GOOGLE_CREDS_JSON")), f)
+
 # --- Konfigurasi Bot Telegram ---
 TOKEN = "8014854736:AAHuEfN_Y4d6i_aesR-JcOAbLi70DKL3HDs"
 
 # --- Konfigurasi Google Sheets ---
-GOOGLE_SHEETS_CREDENTIALS_FILE = 'bot-keuangan-api-781df83f7a07.json'
+GOOGLE_SHEETS_CREDENTIALS_FILE = 'credentials.json'
 # Ganti ini dengan ID Spreadsheet Google Sheet Anda yang sebenarnya
 # Anda bisa menemukan ID ini di URL Google Sheet Anda (bagian antara /d/ dan /edit)
 GOOGLE_SHEET_ID = '1U2hN1cckQ0zzQk7yFEDDyq6-y9SCJ8aM6Tm3MiQPA-w' # ID Spreadsheet Anda
