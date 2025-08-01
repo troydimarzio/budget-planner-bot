@@ -1,0 +1,4 @@
+python-telegram-bot
+gspread
+google-auth
+# git+https://github.com/supabase-community/supabase-py.git
